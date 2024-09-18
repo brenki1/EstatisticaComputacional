@@ -69,4 +69,4 @@ ggplot(data = chicago, aes(x = time, y= temp, color = season)) +
   geom_point()+
   theme_minimal()
 
-
+inverno <- chicago[chicago$season == "Winter",]
