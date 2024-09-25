@@ -22,3 +22,8 @@ artigos <- data.frame(titulo, noticia)
 
 library(tidytext)
 
+artigos|>
+  unnest_tokens(output = words, input = noticia) |>
+  count(words) |>
+  arrange(desc(n))
+
