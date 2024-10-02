@@ -57,5 +57,9 @@ livro |>
   unnest_tokens(word,texto) |>
   inner_join(sentimentos) |>
   count(capitulo,sentiment) |>
-  spread(sentiment,n,fill=0)
+  spread(sentiment,n,fill=0) |>
+  mutate(total = positive - negative) |>
+  ggplot(aes(x = capitulo, y = total)) +
+  geom_col(color = "black", fill = "cyan") +
+  theme_minimal()
 
