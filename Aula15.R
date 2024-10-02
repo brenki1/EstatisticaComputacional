@@ -10,6 +10,13 @@ url <- "https://www.bbc.com/portuguese/articles/c3dv8yy3d8jo"
 html <- read_html(url)
 texto <- html |>
   html_elements("p.bbc-hhl7in") |>
-  html_text2()
+  html_text2() |>
+  paste0(collapse = " ")
 
-paste0(texto)
+conjunto <- data.frame(texto)
+
+conjunto |>
+  unnest_tokens(output = word, input = texto) |>
+  count(word, sort = TRUE) |>
+  top_n(10)
+
