@@ -15,15 +15,27 @@ ggplot(dados, aes(x=resultados))+
   geom_density(color = "#05ffe6", fill = "#ff05ee")+
   theme_minimal()
 
-populacao <- sample(0:1, size =10000, replace = TRUE, prob = c(0.9,0.1))
-
-valor_real = mean(populacao)
+populacao <- sample(0:1, size = 10000, replace = TRUE, prob = c(0.9,0.1))
+valor_real <- mean(populacao)
 
 amostra <- sample(populacao, size = 500, replace = FALSE)
+
+media <- mean(amostra)
+
+parte_inferior <- media - 1.96*(sqrt(media*(1-media))/sqrt(500))
+
+parte_superior <- media + 1.96*(sqrt(media*(1-media))/sqrt(500))
 
 inferiores <- c()
 superiores <- c()
 
 for(k in 1:100) {
-  amostra
+  amostra <- sample(populacao, size = 500, replace = FALSE)
+  
+  media <- mean(amostra)
+  
+  inferiores[k] <- media - 1.96*(sqrt(media*(1-media))/sqrt(500))
+  
+  superiores[k] <- media + 1.96*(sqrt(media*(1-media))/sqrt(500))
 }
+
